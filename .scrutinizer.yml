@@ -30,7 +30,6 @@ checks:
         avoid_fixme_comments: true
         return_doc_comment_if_not_inferrable: true
         param_doc_comment_if_not_inferrable: true
-        more_specific_types_in_doc_comments: true
 
 coding_style:
     php:
@@ -38,6 +37,10 @@ coding_style:
             general:
                 use_tabs: true
         spaces:
+            before_parentheses:
+                closure_definition: true
+            around_operators:
+                concatenation: false
             other:
                 after_type_cast: false
         braces:

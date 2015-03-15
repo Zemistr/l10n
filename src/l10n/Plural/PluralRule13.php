@@ -6,7 +6,7 @@ namespace l10n\Plural;
  */
 class PluralRule13 implements IPlural {
 	final public function getPlural($n = 1) {
-		return $n==1?0:($n==0||$n%100>0&&$n%100<=10?1:($n%100>10&&$n%100<20?2:3));
+		return $n == 1 ? 0 : ($n == 0 || $n % 100 > 0 && $n % 100 <= 10 ? 1 : ($n % 100 > 10 && $n % 100 < 20 ? 2 : 3));
 	}
 
 	final public function getPluralForm() {
