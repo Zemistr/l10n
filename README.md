@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/Zemistr/l10n.svg?branch=master)](https://travis-ci.org/Zemistr/l10n)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Zemistr/l10n/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Zemistr/l10n/?branch=master)
+
 # l10n
 Localization and Plurals
 

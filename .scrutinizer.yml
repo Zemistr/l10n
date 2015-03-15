@@ -66,3 +66,12 @@ coding_style:
                 general: lower
             constants:
                 true_false_null: lower
+
+build:
+    tests:
+        override:
+            -
+                command: 'phpunit --configuration phpunit.xml --coverage-clover=some-file'
+                coverage:
+                    file: 'some-file'
+                    format: 'php-clover'
