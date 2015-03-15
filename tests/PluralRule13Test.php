@@ -1,8 +1,6 @@
 <?php
 use l10n\Plural\PluralRule13;
 
-require('bootstrap.php');
-
 class PluralRule13Test extends PluralRule0Test {
 	protected function setUp() {
 		$this->class = new PluralRule13();

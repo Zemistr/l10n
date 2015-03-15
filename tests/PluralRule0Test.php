@@ -1,8 +1,6 @@
 <?php
 use l10n\Plural\PluralRule0;
 
-require('bootstrap.php');
-
 class PluralRule0Test extends PHPUnit_Framework_TestCase {
 	/** @var PluralRule0 */
 	protected $class;
