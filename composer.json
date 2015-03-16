@@ -4,7 +4,8 @@
   "keywords": [
     "l10n",
     "localization",
-    "plurals"
+    "plurals",
+    "translator"
   ],
   "homepage": "https://github.com/zemistr/l10n",
   "minimum-stability": "stable",
