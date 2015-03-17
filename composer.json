@@ -1,6 +1,6 @@
 {
   "name": "zemistr/l10n",
-  "description": "Localization and Plurals",
+  "description": "Localization, plurals and simple translator",
   "keywords": [
     "l10n",
     "localization",
