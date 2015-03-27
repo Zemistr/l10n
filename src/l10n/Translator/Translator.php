@@ -43,7 +43,7 @@ class Translator {
 	}
 
 	/**
-	 * @param $plural
+	 * @param int $plural
 	 */
 	protected function checkPlural($plural) {
 		if ($plural > $this->plural->getPluralsCount() - 1) {
@@ -102,7 +102,7 @@ class Translator {
 	 * @param string    $key
 	 * @param int|array $n When $n is an array, it's used as $parameters.
 	 * @param array     $parameters
-	 * @return null|string
+	 * @return string
 	 */
 	public function translate($key, $n = 1, array $parameters = array()) {
 		if (is_array($n)) {
