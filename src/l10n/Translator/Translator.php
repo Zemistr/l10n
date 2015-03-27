@@ -1,12 +1,11 @@
 <?php
-
 namespace l10n\Translator;
 
 use l10n\Plural\IPlural;
 
 class Translator {
 	/** @var \l10n\Plural\IPlural */
-	private $plural;
+	protected $plural;
 
 	/** @var array */
 	private $translated = array();
@@ -14,11 +13,26 @@ class Translator {
 	/** @var array */
 	private $untranslated = array();
 
+	/** @var \l10n\Translator\IStorage */
+	protected $storage;
+
 	/**
-	 * @param \l10n\Plural\IPlural $plural
+	 * @param \l10n\Plural\IPlural      $plural
+	 * @param \l10n\Translator\IStorage $loader
 	 */
-	public function __construct(IPlural $plural) {
+	public function __construct(IPlural $plural, IStorage $loader = null) {
 		$this->plural = $plural;
+
+		if ($loader) {
+			$this->storage = $loader;
+			$this->storage->load($this);
+		}
+	}
+
+	public function __destruct() {
+		if ($this->storage instanceof IStorage) {
+			$this->storage->save($this);
+		}
 	}
 
 	/**

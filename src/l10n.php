@@ -135,6 +135,7 @@ spl_autoload_register(
 			'l10n\\Plural\\PluralRule8'                => 'Plural/PluralRule8.php',
 			'l10n\\Plural\\PluralRule9'                => 'Plural/PluralRule9.php',
 
+			'l10n\\Translator\\IStorage'               => 'Translator/IStorage.php',
 			'l10n\\Translator\\Translator'             => 'Translator/Translator.php'
 		);
 

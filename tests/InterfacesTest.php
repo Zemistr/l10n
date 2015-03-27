@@ -20,4 +20,12 @@ class InterfacesTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame(true, method_exists($mock, 'getPluralForm'), 'Method "getPluralForm" must exists');
 		$this->assertSame(true, method_exists($mock, 'getPluralsCount'), 'Method "getPluralsCount" must exists');
 	}
+
+	public function testIStorage() {
+		$mock = $this->getMock('l10n\Translator\IStorage');
+
+		$this->assertInstanceOf('l10n\Translator\IStorage', $mock);
+		$this->assertSame(true, method_exists($mock, 'load'), 'Method "load" must exists');
+		$this->assertSame(true, method_exists($mock, 'save'), 'Method "save" must exists');
+	}
 }

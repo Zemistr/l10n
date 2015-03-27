@@ -23,13 +23,34 @@ class TranslatorTest extends PHPUnit_Framework_TestCase {
 		return $mock;
 	}
 
-	public function testConstructor() {
+	private function createStorageMock() {
+		/** @var \l10n\Translator\IStorage|PHPUnit_Framework_MockObject_MockObject $mock */
+		$mock = $this->getMock('l10n\Translator\IStorage');
+
+		$mock->expects($this->once())
+			->method("load")
+			->with($this->isInstanceOf('l10n\Translator\Translator'));
+
+		$mock->expects($this->once())
+			->method("save")
+			->with($this->isInstanceOf('l10n\Translator\Translator'));
+
+		return $mock;
+	}
+
+	public function testConstructorAndDestruct() {
 		$plural = $this->createPluralMock();
 
 		$translator = new Translator($plural);
 
 		$this->assertInstanceOf('l10n\Plural\IPlural', $plural);
 		$this->assertSame($plural, $translator->getPlural());
+		$translator->__destruct();
+
+		$loader = $this->createStorageMock();
+
+		$translator = new Translator($plural, $loader);
+		$translator->__destruct();
 	}
 
 	public function testSetGetRemoveText() {
