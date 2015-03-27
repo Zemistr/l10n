@@ -18,13 +18,13 @@ class Translator {
 
 	/**
 	 * @param \l10n\Plural\IPlural      $plural
-	 * @param \l10n\Translator\IStorage $loader
+	 * @param \l10n\Translator\IStorage $storage
 	 */
-	public function __construct(IPlural $plural, IStorage $loader = null) {
+	public function __construct(IPlural $plural, IStorage $storage = null) {
 		$this->plural = $plural;
 
-		if ($loader) {
-			$this->storage = $loader;
+		if ($storage) {
+			$this->storage = $storage;
 			$this->storage->load($this);
 		}
 	}
