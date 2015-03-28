@@ -59,6 +59,7 @@ class Translator {
 	public function setText($key, $text, $plural = 0) {
 		$this->checkPlural($plural);
 		$this->translated[$key][$plural] = $text;
+		$this->removeUntranslated($key, $plural);
 	}
 
 	/**
@@ -71,11 +72,15 @@ class Translator {
 
 		if (func_num_args() === 2) {
 			if (isset($this->translated[$key][$plural])) {
+				$this->removeUntranslated($key, $plural);
+
 				return $this->translated[$key][$plural];
 			}
 		}
 		else {
 			if (isset($this->translated[$key])) {
+				$this->removeUntranslated($key);
+
 				return $this->translated[$key];
 			}
 		}
@@ -85,17 +90,34 @@ class Translator {
 
 	/**
 	 * @param string $key
-	 * @param int    $plural
+	 * @param int    $plural Nothing for all plurals
 	 */
 	public function removeText($key, $plural = 0) {
 		if (func_num_args() === 2) {
 			unset($this->translated[$key][$plural]);
+			$this->removeUntranslated($key, $plural);
 		}
 		else {
 			unset($this->translated[$key]);
+			$this->removeUntranslated($key);
 		}
+	}
 
-		unset($this->untranslated[$key]);
+	/**
+	 * @param     $key
+	 * @param int $plural Nothing for all plurals
+	 */
+	public function removeUntranslated($key, $plural = 0) {
+		if (func_num_args() === 2) {
+			unset($this->untranslated[$key][$plural]);
+
+			if (empty($this->untranslated[$key])) {
+				unset($this->untranslated[$key]);
+			}
+		}
+		else {
+			unset($this->untranslated[$key]);
+		}
 	}
 
 	/**
@@ -114,12 +136,12 @@ class Translator {
 		$translated = $this->getText($key, $plural);
 
 		if ($translated === null) {
-			$this->untranslated[$key] = true;
+			$this->untranslated[$key][$plural] = true;
 
 			return $key;
 		}
 
-		unset($this->untranslated[$key]);
+		$this->removeUntranslated($key, $plural);
 
 		$parameters += array('%n%' => $n);
 		$translated = strtr($translated, $parameters);
@@ -138,6 +160,6 @@ class Translator {
 	 * @return array
 	 */
 	public function getUntranslated() {
-		return array_keys($this->untranslated);
+		return $this->untranslated;
 	}
 }

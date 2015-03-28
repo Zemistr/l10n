@@ -123,10 +123,82 @@ class TranslatorTest extends PHPUnit_Framework_TestCase {
 		$plural = $this->createPluralMock();
 
 		$translator = new Translator($plural);
+		$translator->translate('key');
+		$translator->translate('key_2');
 		$translator->translate('key', 0);
 		$translator->translate('key_2', 0);
 
-		$expected = array("key", "key_2");
+		$expected = array(
+			"key"   => array(true, true),
+			"key_2" => array(true, true)
+		);
 		$this->assertSame($expected, $translator->getUntranslated());
+
+		$translator->setText('key', 'value');
+		unset($expected['key'][0]);
+		$this->assertSame($expected, $translator->getUntranslated());
+
+		$translator->setText('key', 'value', 1);
+		unset($expected['key']);
+		$this->assertSame($expected, $translator->getUntranslated());
+
+		$translator->removeText('key_2', 0);
+		unset($expected['key_2'][0]);
+		$this->assertSame($expected, $translator->getUntranslated());
+
+		$translator->removeText('key_2', 1);
+		unset($expected['key_2']);
+		$this->assertSame($expected, $translator->getUntranslated());
+
+		$translator->translate('key_2');
+		$translator->translate('key_2', 0);
+
+		$expected = array(
+			"key_2" => array(true, true)
+		);
+		$this->assertSame($expected, $translator->getUntranslated());
+
+		$translator->setText('key_2', 'value', 0);
+		unset($expected['key_2'][0]);
+		$this->assertSame($expected, $translator->getUntranslated());
+
+		$translator->setText('key_2', 'value', 1);
+		unset($expected['key_2']);
+		$this->assertSame($expected, $translator->getUntranslated());
+	}
+
+	public function testRemoveUntranslated() {
+		$plural = $this->createPluralMock();
+
+		$translator = new Translator($plural);
+		$translator->translate('key');
+		$translator->translate('key_2');
+		$translator->translate('key', 0);
+		$translator->translate('key_2', 0);
+
+		$expected = array(
+			"key"   => array(true, true),
+			"key_2" => array(true, true)
+		);
+		$this->assertSame($expected, $translator->getUntranslated());
+
+		$translator->removeUntranslated('key', 0);
+		$translator->removeUntranslated('key_2', 0);
+		$expected = array(
+			"key"   => array(1 => true),
+			"key_2" => array(1 => true)
+		);
+		$this->assertSame($expected, $translator->getUntranslated());
+
+		$translator->removeUntranslated('key', 1);
+		$translator->removeUntranslated('key_2', 1);
+		$this->assertSame(array(), $translator->getUntranslated());
+
+		$translator = new Translator($plural);
+		$translator->translate('key');
+		$translator->translate('key_2');
+		$translator->removeUntranslated('key');
+		$translator->removeUntranslated('key_2');
+		$this->assertSame(array(), $translator->getUntranslated());
 	}
 }
