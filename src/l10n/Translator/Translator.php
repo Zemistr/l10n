@@ -104,8 +104,8 @@ class Translator {
 	}
 
 	/**
-	 * @param     $key
-	 * @param int $plural Nothing for all plurals
+	 * @param string $key
+	 * @param int    $plural Nothing for all plurals
 	 */
 	public function removeUntranslated($key, $plural = 0) {
 		if (func_num_args() === 2) {
