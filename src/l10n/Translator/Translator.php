@@ -17,8 +17,8 @@ class Translator {
 	protected $storage;
 
 	/**
-	 * @param \l10n\Plural\IPlural      $plural
-	 * @param \l10n\Translator\IStorage $storage
+	 * @param \l10n\Plural\IPlural           $plural
+	 * @param \l10n\Translator\IStorage|null $storage
 	 */
 	public function __construct(IPlural $plural, IStorage $storage = null) {
 		$this->plural = $plural;
