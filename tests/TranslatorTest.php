@@ -167,7 +167,7 @@ class TranslatorTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame($expected, $translator->getUntranslated());
 	}
 
-	public function testRemoveUntranslated() {
+	public function testSetAndRemoveUntranslated() {
 		$plural = $this->createPluralMock();
 
 		$translator = new Translator($plural);
@@ -197,6 +197,38 @@ class TranslatorTest extends PHPUnit_Framework_TestCase {
 		$translator = new Translator($plural);
 		$translator->translate('key');
 		$translator->translate('key_2');
+		$translator->removeUntranslated('key');
+		$translator->removeUntranslated('key_2');
+		$this->assertSame(array(), $translator->getUntranslated());
+
+		$translator = new Translator($plural);
+		$translator->setUntranslated('key');
+		$translator->setUntranslated('key_2');
+		$expected = array(
+			"key"   => array(true),
+			"key_2" => array(true)
+		);
+
+		$this->assertSame($expected, $translator->getUntranslated());
+
+		$translator->setUntranslated('key', 1);
+		$translator->setUntranslated('key_2', 1);
+		$expected = array(
+			"key"   => array(true, true),
+			"key_2" => array(true, true)
+		);
+
+		$this->assertSame($expected, $translator->getUntranslated());
+
+		$translator->removeUntranslated('key', 0);
+		$translator->removeUntranslated('key_2', 1);
+		$expected = array(
+			"key"   => array(1 => true),
+			"key_2" => array(true)
+		);
+
+		$this->assertSame($expected, $translator->getUntranslated());
+
 		$translator->removeUntranslated('key');
 		$translator->removeUntranslated('key_2');
 		$this->assertSame(array(), $translator->getUntranslated());

@@ -105,6 +105,15 @@ class Translator {
 
 	/**
 	 * @param string $key
+	 * @param int    $plural
+	 */
+	public function setUntranslated($key, $plural = 0) {
+		$this->checkPlural($plural);
+		$this->untranslated[$key][$plural] = true;
+	}
+
+	/**
+	 * @param string $key
 	 * @param int    $plural Nothing for all plurals
 	 */
 	public function removeUntranslated($key, $plural = 0) {
@@ -136,7 +145,7 @@ class Translator {
 		$translated = $this->getText($key, $plural);
 
 		if ($translated === null) {
-			$this->untranslated[$key][$plural] = true;
+			$this->setUntranslated($key, $plural);
 
 			return $key;
 		}
