@@ -1,4 +1,5 @@
 <?php
+
 class AutoloaderTest extends PHPUnit_Framework_TestCase {
 	public function filesProvider() {
 		$data = array();
@@ -26,10 +27,10 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testLoad($interface, $class, $is_interface) {
 		if ($is_interface) {
-			$this->assertSame(true, interface_exists($class), "Interface '$class' not found");
+			$this->assertTrue(interface_exists($class), "Interface '$class' not found");
 		}
 		else {
-			$this->assertSame(true, class_exists($class), "Class '$class' not found");
+			$this->assertTrue(class_exists($class), "Class '$class' not found");
 			$this->assertInstanceOf($interface, new $class);
 		}
 	}
