@@ -233,4 +233,28 @@ class TranslatorTest extends PHPUnit_Framework_TestCase {
 		$translator->removeUntranslated('key_2');
 		$this->assertSame(array(), $translator->getUntranslated());
 	}
+
+	public function testClearTranslated() {
+		$plural = $this->createPluralMock();
+
+		$translator = new Translator($plural);
+		$translator->setText('foo', 'bar');
+
+		$this->assertSame(array('foo' => array('bar')), $translator->getTranslated());
+
+		$translator->clearTranslated();
+		$this->assertSame(array(), $translator->getTranslated());
+	}
+
+	public function testClearUntranslated() {
+		$plural = $this->createPluralMock();
+
+		$translator = new Translator($plural);
+		$translator->setUntranslated('foo');
+
+		$this->assertSame(array('foo' => array(true)), $translator->getUntranslated());
+
+		$translator->clearUntranslated();
+		$this->assertSame(array(), $translator->getUntranslated());
+	}
 }

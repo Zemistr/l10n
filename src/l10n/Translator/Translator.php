@@ -131,6 +131,14 @@ class Translator {
 		}
 	}
 
+	public function clearTranslated() {
+		$this->translated = array();
+	}
+
+	public function clearUntranslated() {
+		$this->untranslated = array();
+	}
+
 	/**
 	 * @param string         $key
 	 * @param int|array|null $n When $n is null, than singular will be selected. When $n is an array, it's used as $parameters.
