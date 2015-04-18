@@ -46,8 +46,8 @@ class Translator {
 	 * @param int $plural
 	 */
 	protected function checkPlural($plural) {
-		if ($plural > $this->plural->getPluralsCount() - 1) {
-			throw new \RangeException('The plural is bigger than is allowed');
+		if ($plural > ($max = $this->plural->getPluralsCount() - 1)) {
+			throw new \RangeException(sprintf('The plural (%d) is bigger than is allowed (%d)', $plural, $max));
 		}
 	}
 

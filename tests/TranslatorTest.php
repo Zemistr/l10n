@@ -89,7 +89,7 @@ class TranslatorTest extends PHPUnit_Framework_TestCase {
 		$translator->setText('key', 'text %n%', 0);
 		$translator->setText('key', 'text %n%', 1);
 
-		$this->setExpectedException('RangeException', 'The plural is bigger than is allowed');
+		$this->setExpectedException('RangeException', 'The plural (2) is bigger than is allowed (1)');
 		$translator->setText('key', 'text %n%', 2);
 	}
 
