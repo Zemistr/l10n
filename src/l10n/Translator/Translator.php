@@ -46,7 +46,9 @@ class Translator {
 	 * @param int $plural
 	 */
 	protected function checkPlural($plural) {
-		if ($plural > ($max = $this->plural->getPluralsCount() - 1)) {
+		$max = $this->plural->getPluralsCount() - 1;
+
+		if ($plural > $max) {
 			throw new \RangeException(sprintf('The plural (%d) is bigger than is allowed (%d)', $plural, $max));
 		}
 	}
@@ -130,9 +132,9 @@ class Translator {
 	}
 
 	/**
-	 * @param string    $key
-	 * @param int|array $n When $n is null, than singular will be selected. When $n is an array, it's used as $parameters.
-	 * @param array     $parameters
+	 * @param string         $key
+	 * @param int|array|null $n When $n is null, than singular will be selected. When $n is an array, it's used as $parameters.
+	 * @param array          $parameters
 	 * @return string
 	 */
 	public function translate($key, $n = null, array $parameters = array()) {
@@ -141,7 +143,12 @@ class Translator {
 			$n = null;
 		}
 
-		$plural = $n === null ? 0 : $this->plural->getPlural($n);
+		$plural = 0;
+
+		if ($n !== null) {
+			$plural = $this->plural->getPlural($n);
+		}
+
 		$translated = $this->getText($key, $plural);
 
 		if ($translated === null) {
