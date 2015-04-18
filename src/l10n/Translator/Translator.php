@@ -131,17 +131,17 @@ class Translator {
 
 	/**
 	 * @param string    $key
-	 * @param int|array $n When $n is an array, it's used as $parameters.
+	 * @param int|array $n When $n is null, than singular will be selected. When $n is an array, it's used as $parameters.
 	 * @param array     $parameters
 	 * @return string
 	 */
-	public function translate($key, $n = 1, array $parameters = array()) {
+	public function translate($key, $n = null, array $parameters = array()) {
 		if (is_array($n)) {
 			$parameters = $n;
-			$n = 1;
+			$n = null;
 		}
 
-		$plural = $this->plural->getPlural($n);
+		$plural = $n === null ? 0 : $this->plural->getPlural($n);
 		$translated = $this->getText($key, $plural);
 
 		if ($translated === null) {
