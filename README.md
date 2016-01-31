@@ -1,8 +1,8 @@
 [![Build Status](https://travis-ci.org/Zemistr/l10n.svg?branch=master)](https://travis-ci.org/Zemistr/l10n)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Zemistr/l10n/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Zemistr/l10n/?branch=master)
 [![Scrutinizer Code Coverage](https://scrutinizer-ci.com/g/Zemistr/l10n/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Zemistr/l10n/?branch=master)
-[![Packagist Total Downloads](https://img.shields.io/packagist/dt/zemistr/l10n.svg)](https://packagist.org/packages/zemistr/l10n)
-[![License](https://img.shields.io/packagist/l/zemistr/l10n.svg)](http://opensource.org/licenses/mit-license.php)
+[![Total Downloads](https://poser.pugx.org/zemistr/l10n/downloads)](https://packagist.org/packages/zemistr/l10n)
+[![License](https://poser.pugx.org/zemistr/l10n/license)](https://github.com/zemistr/l10n/blob/master/LICENSE.md)
 
 # l10n
 Localization, plurals and translator
